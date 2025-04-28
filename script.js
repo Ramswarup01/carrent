@@ -204,3 +204,85 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   }
 })
+
+
+
+
+
+/ Getting references to the modal and forms
+  const signInForm = document.getElementById("signInForm");
+  const registerForm = document.getElementById("registerForm");
+  const authModal = document.getElementById("authModal");
+  const showRegisterBtn = document.getElementById("showRegister");
+  const showSignInBtn = document.getElementById("showSignIn");
+
+  // Open the modal
+  const openAuthModal = () => {
+    authModal.style.display = "block";
+  };
+
+  // Close the modal
+  const closeAuthModal = () => {
+    authModal.style.display = "none";
+  };
+
+  // Show Register form
+  showRegisterBtn.addEventListener("click", () => {
+    signInForm.style.display = "none";
+    registerForm.style.display = "block";
+  });
+
+  // Show Sign In form
+  showSignInBtn.addEventListener("click", () => {
+    registerForm.style.display = "none";
+    signInForm.style.display = "block";
+  });
+
+  // Close the modal when clicking outside of it
+  window.addEventListener("click", (e) => {
+    if (e.target === authModal) {
+      closeAuthModal();
+    }
+  });
+
+  // Form validation (basic frontend validation)
+  const signIn = document.getElementById("signIn");
+  const register = document.getElementById("register");
+
+  // Sign-In form submission
+  signIn && signIn.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("signInEmail").value;
+    const password = document.getElementById("signInPassword").value;
+
+    if (!email || !password) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    // Mock sign-in (just for frontend validation)
+    alert(`Signing in with: ${email}`);
+  });
+
+  // Register form submission
+  register && register.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const name = document.getElementById("registerName").value;
+    const email = document.getElementById("registerEmail").value;
+    const password = document.getElementById("registerPassword").value;
+
+    if (!name || !email || !password) {
+      alert("Please fill in all fields!");
+      return;
+    }
+
+    // Mock registration (just for frontend validation)
+    alert(`Registering with: ${name}, ${email}`);
+  });
+
+  // Example of opening the modal (you can trigger this on a button click or link)
+  const signInLink = document.getElementById("signInLink");
+  if (signInLink) {
+    signInLink.addEventListener("click", openAuthModal);
+  }
+});
