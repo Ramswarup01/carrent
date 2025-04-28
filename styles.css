@@ -9,6 +9,7 @@
 body {
   overflow-x: hidden;
   color: #333;
+  background-color: #f0f4f8;
 }
 
 .container {
@@ -27,7 +28,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 5%;
-  background-color: #9333ea; /* Purple color */
+  background: linear-gradient(90deg, #007BFF, #0056D2);
   color: white;
   position: sticky;
   top: 0;
@@ -67,7 +68,7 @@ nav {
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: #f0f0f0;
+  color: #cce0ff;
 }
 
 .mobile-menu-btn {
@@ -97,15 +98,15 @@ nav {
 
 .register {
   background-color: white;
-  color: #333;
+  color: #007BFF;
   border: none;
 }
 
-/* Hero Section Styles */
+/* Hero Section */
 .hero {
   position: relative;
   height: 85vh;
-  background: linear-gradient(90deg, #000 50%, #fdf2f8 50%);
+  background: linear-gradient(90deg, #0056D2 50%, #e6f0ff 50%);
   overflow: hidden;
 }
 
@@ -137,7 +138,7 @@ nav {
 }
 
 .highlight {
-  color: #9333ea; /* Purple color */
+  color: #00d4ff;
 }
 
 .description {
@@ -160,7 +161,7 @@ nav {
 }
 
 .book-ride {
-  background-color: #9333ea; /* Purple color */
+  background-color: #00b4ff;
   color: white;
   border: none;
 }
@@ -186,7 +187,7 @@ nav {
   z-index: 2;
 }
 
-/* City skyline background */
+/* City Skyline Background */
 .hero-image::before {
   content: "";
   position: absolute;
@@ -194,7 +195,7 @@ nav {
   right: 0;
   bottom: 0;
   left: 0;
-  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" fill="none" stroke="%23ddd" stroke-width="1"><path d="M100,400 v-150 h30 v150 M150,400 v-200 h40 v200 M210,400 v-300 h50 v300 M280,400 v-250 h40 v250 M340,400 v-180 h30 v180 M390,400 v-220 h45 v220 M450,400 v-350 h60 v350 M530,400 v-280 h50 v280 M600,400 v-200 h40 v200 M660,400 v-150 h30 v150"/></svg>');
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 500" fill="none" stroke="%23aaa" stroke-width="1"><path d="M100,400 v-150 h30 v150 M150,400 v-200 h40 v200 M210,400 v-300 h50 v300 M280,400 v-250 h40 v250 M340,400 v-180 h30 v180 M390,400 v-220 h45 v220 M450,400 v-350 h60 v350 M530,400 v-280 h50 v280 M600,400 v-200 h40 v200 M660,400 v-150 h30 v150"/></svg>');
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -202,9 +203,9 @@ nav {
   z-index: 1;
 }
 
-/* Booking Form Section */
+/* Booking Form */
 .booking-form {
-  background-color: #f8f8f8;
+  background-color: #ffffff;
   padding: 2rem 0;
   margin-top: -2rem;
   position: relative;
@@ -252,23 +253,11 @@ nav {
   font-size: 1rem;
 }
 
-.car-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.car-option {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-
 .search-btn {
   display: block;
   width: 100%;
   padding: 12px;
-  background-color: #9333ea;
+  background-color: #0056D2;
   color: white;
   border: none;
   border-radius: 4px;
@@ -280,7 +269,7 @@ nav {
 }
 
 .search-btn:hover {
-  background-color: #7e22ce;
+  background-color: #0041a8;
 }
 
 /* About Section */
@@ -310,18 +299,10 @@ nav {
   gap: 50px;
 }
 
-.about-image {
-  flex: 1;
-}
-
 .about-image img {
   width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.about-text {
-  flex: 1;
 }
 
 .about-text h3 {
@@ -336,25 +317,9 @@ nav {
   color: #555;
 }
 
-.about-features {
-  list-style: none;
-  margin-bottom: 30px;
-}
-
-.about-features li {
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.about-features i {
-  color: #9333ea;
-}
-
 .learn-more-btn {
   padding: 12px 24px;
-  background-color: #9333ea;
+  background-color: #007BFF;
   color: white;
   border: none;
   border-radius: 4px;
@@ -364,8 +329,9 @@ nav {
 }
 
 .learn-more-btn:hover {
-  background-color: #7e22ce;
+  background-color: #0056D2;
 }
+
 
 /* Vehicle Models Section */
 .vehicles {
