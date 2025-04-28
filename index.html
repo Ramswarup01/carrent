@@ -50,114 +50,6 @@
         </div>
     </section>
 
-    <!-- Booking Form Section -->
-    <section class="booking-form" id="booking">
-        <div class="form-container">
-            <h3>Book a car</h3>
-            <form id="carBookingForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pick-up Location</label>
-                        <select id="pickupLocation" required>
-                            <option value="">Select pick-up location</option>
-                            <option value="airport">Airport Terminal</option>
-                            <option value="downtown">Downtown</option>
-                            <option value="north">North Station</option>
-                            <option value="south">South Station</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="dropoffLocation"><i class="fas fa-map-marker-alt"></i> Drop-off Location</label>
-                        <select id="dropoffLocation" required>
-                            <option value="">Select drop-off location</option>
-                            <option value="airport">Airport Terminal</option>
-                            <option value="downtown">Downtown</option>
-                            <option value="north">North Station</option>
-                            <option value="south">South Station</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="pickupDate"><i class="fas fa-calendar"></i> Pick-up Date</label>
-                        <input type="date" id="pickupDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickupTime"><i class="fas fa-clock"></i> Pick-up Time</label>
-                        <input type="time" id="pickupTime" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="dropoffDate"><i class="fas fa-calendar"></i> Drop-off Date</label>
-                        <input type="date" id="dropoffDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dropoffTime"><i class="fas fa-clock"></i> Drop-off Time</label>
-                        <input type="time" id="dropoffTime" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group car-type">
-                        <label><i class="fas fa-car"></i> Select Car Type</label>
-                        <div class="car-options">
-                            <div class="car-option">
-                                <input type="radio" id="economy" name="carType" value="economy" checked>
-                                <label for="economy">Economy</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="compact" name="carType" value="compact">
-                                <label for="compact">Compact</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="midsize" name="carType" value="midsize">
-                                <label for="midsize">Mid-size</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="luxury" name="carType" value="luxury">
-                                <label for="luxury">Luxury</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="suv" name="carType" value="suv">
-                                <label for="suv">SUV</label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <button type="submit" class="search-btn">Search</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="about" id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Us</h2>
-                <p>Learn more about our company</p>
-            </div>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="/placeholder.svg?height=400&width=600" alt="Car rental company office">
-                </div>
-                <div class="about-text">
-                    <h3>We offer the best experience with our rental deals</h3>
-                    <p>Founded in 2010, Car Rental has been providing exceptional car rental services for over a decade. Our mission is to offer reliable, affordable, and convenient transportation solutions to our customers.</p>
-                    <p>What sets us apart:</p>
-                    <ul class="about-features">
-                        <li><i class="fas fa-check-circle"></i> 24/7 customer support</li>
-                        <li><i class="fas fa-check-circle"></i> Wide range of vehicles</li>
-                        <li><i class="fas fa-check-circle"></i> Transparent pricing</li>
-                        <li><i class="fas fa-check-circle"></i> No hidden fees</li>
-                        <li><i class="fas fa-check-circle"></i> Free cancellation</li>
-                        <li><i class="fas fa-check-circle"></i> Multiple pickup locations</li>
-                    </ul>
-                    <button class="learn-more-btn">Learn More</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Vehicle Models Section -->
     <section class="vehicles" id="vehicles">
         <div class="container">
@@ -166,6 +58,7 @@
                 <p>Explore our fleet of premium vehicles</p>
             </div>
             <div class="vehicle-container">
+                <!-- Economy Car -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="Economy Car">
@@ -173,7 +66,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Economy</h3>
-                            <div class="price">$45<span>/day</span></div>
+                            <div class="price">₹2,000<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Toyota Yaris</div>
@@ -186,6 +79,7 @@
                         <button class="book-now-btn">Book Now</button>
                     </div>
                 </div>
+                <!-- Compact Car -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="Compact Car">
@@ -193,7 +87,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Compact</h3>
-                            <div class="price">$55<span>/day</span></div>
+                            <div class="price">₹2,500<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Honda Civic</div>
@@ -206,6 +100,7 @@
                         <button class="book-now-btn">Book Now</button>
                     </div>
                 </div>
+                <!-- SUV -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="SUV">
@@ -213,7 +108,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>SUV</h3>
-                            <div class="price">$85<span>/day</span></div>
+                            <div class="price">₹5,000<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Toyota RAV4</div>
@@ -226,6 +121,7 @@
                         <button class="book-now-btn">Book Now</button>
                     </div>
                 </div>
+                <!-- Luxury Car -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="Luxury Car">
@@ -233,7 +129,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Luxury</h3>
-                            <div class="price">$120<span>/day</span></div>
+                            <div class="price">₹10,000<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Mercedes E-Class</div>
@@ -253,87 +149,7 @@
         </div>
     </section>
 
-    <!-- Reviews Section -->
-    <section class="reviews" id="reviews">
-        <div class="container">
-            <div class="section-title">
-                <h2>Customer Reviews</h2>
-                <p>What our customers say about us</p>
-            </div>
-            <div class="reviews-slider">
-                <div class="slider-controls">
-                    <button class="prev-btn" id="prevReview"><i class="fas fa-chevron-left"></i></button>
-                    <button class="next-btn" id="nextReview"><i class="fas fa-chevron-right"></i></button>
-                </div>
-                <div class="reviews-container" id="reviewsContainer">
-                    <div class="review-card active">
-                        <div class="review-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"The car was in excellent condition and the rental process was smooth and hassle-free. I would definitely use their services again!"</p>
-                        <div class="reviewer">
-                            <div class="reviewer-image">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
-                            </div>
-                            <div class="reviewer-info">
-                                <h4>John Smith</h4>
-                                <p>New York</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p class="review-text">"Great customer service and competitive prices. The car was clean and well-maintained. I highly recommend this car rental service."</p>
-                        <div class="reviewer">
-                            <div class="reviewer-image">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
-                            </div>
-                            <div class="reviewer-info">
-                                <h4>Emily Johnson</h4>
-                                <p>Chicago</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="review-card">
-                        <div class="review-rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p class="review-text">"I've rented from many companies before, but this one stands out for their exceptional service and quality vehicles. Will definitely be my go-to rental company from now on."</p>
-                        <div class="reviewer">
-                            <div class="reviewer-image">
-                                <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
-                            </div>
-                            <div class="reviewer-info">
-                                <h4>Michael Brown</h4>
-                                <p>Los Angeles</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-dots" id="reviewDots">
-                    <span class="dot active" data-index="0"></span>
-                    <span class="dot" data-index="1"></span>
-                    <span class="dot" data-index="2"></span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-   <!-- Footer -->
+    <!-- Footer -->
     <footer id="contact">
         <div class="footer-container">
             <div class="footer-column">
