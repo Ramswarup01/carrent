@@ -12,6 +12,6 @@ export default async function handler(req, res) {
       message: `Booking created for Car ID: ${carId}, User ID: ${userId}, Rental Period: ${rentalPeriod}`,
     });
   } else {
-    res.status(405).json({ message: 'Method Not Allowed' });
+    res.status(405).json({ message: 'Method Not Allowed-this is the mesg im seeing in the url' });
   }
 }
