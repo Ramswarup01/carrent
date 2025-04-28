@@ -38,7 +38,7 @@
             <div class="hero-text">
                 <p class="subtitle">Plan your trip now</p>
                 <h2>Save <span class="highlight">BIG</span> With Our Car Rental</h2>
-                <p class="description">Rent the car of your dreams. Unbeatable prices, flexible pick-up options and much more.</p>
+                <p class="description">Rent the car of your dreams. Unbeatable prices, flexible pick-up options, and much more.</p>
                 <div class="cta-buttons">
                     <button class="book-ride">Book Ride</button>
                     <button class="learn-more">Learn More</button>
@@ -46,6 +46,114 @@
             </div>
             <div class="hero-image">
                 <img src="car.png" alt="Red Mazda car" class="car-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Form Section -->
+    <section class="booking-form" id="booking">
+        <div class="form-container">
+            <h3>Book a car</h3>
+            <form id="carBookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pick-up Location</label>
+                        <select id="pickupLocation" required>
+                            <option value="">Select pick-up location</option>
+                            <option value="airport">Airport Terminal</option>
+                            <option value="downtown">Downtown</option>
+                            <option value="north">North Station</option>
+                            <option value="south">South Station</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dropoffLocation"><i class="fas fa-map-marker-alt"></i> Drop-off Location</label>
+                        <select id="dropoffLocation" required>
+                            <option value="">Select drop-off location</option>
+                            <option value="airport">Airport Terminal</option>
+                            <option value="downtown">Downtown</option>
+                            <option value="north">North Station</option>
+                            <option value="south">South Station</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pickupDate"><i class="fas fa-calendar"></i> Pick-up Date</label>
+                        <input type="date" id="pickupDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickupTime"><i class="fas fa-clock"></i> Pick-up Time</label>
+                        <input type="time" id="pickupTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dropoffDate"><i class="fas fa-calendar"></i> Drop-off Date</label>
+                        <input type="date" id="dropoffDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dropoffTime"><i class="fas fa-clock"></i> Drop-off Time</label>
+                        <input type="time" id="dropoffTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group car-type">
+                        <label><i class="fas fa-car"></i> Select Car Type</label>
+                        <div class="car-options">
+                            <div class="car-option">
+                                <input type="radio" id="economy" name="carType" value="economy" checked>
+                                <label for="economy">Economy</label>
+                            </div>
+                            <div class="car-option">
+                                <input type="radio" id="compact" name="carType" value="compact">
+                                <label for="compact">Compact</label>
+                            </div>
+                            <div class="car-option">
+                                <input type="radio" id="midsize" name="carType" value="midsize">
+                                <label for="midsize">Mid-size</label>
+                            </div>
+                            <div class="car-option">
+                                <input type="radio" id="luxury" name="carType" value="luxury">
+                                <label for="luxury">Luxury</label>
+                            </div>
+                            <div class="car-option">
+                                <input type="radio" id="suv" name="carType" value="suv">
+                                <label for="suv">SUV</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+                <p>Learn more about our company</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="/placeholder.svg?height=400&width=600" alt="Car rental company office">
+                </div>
+                <div class="about-text">
+                    <h3>We offer the best experience with our rental deals</h3>
+                    <p>Founded in 2010, Car Rental has been providing exceptional car rental services for over a decade. Our mission is to offer reliable, affordable, and convenient transportation solutions to our customers.</p>
+                    <p>What sets us apart:</p>
+                    <ul class="about-features">
+                        <li><i class="fas fa-check-circle"></i> 24/7 customer support</li>
+                        <li><i class="fas fa-check-circle"></i> Wide range of vehicles</li>
+                        <li><i class="fas fa-check-circle"></i> Transparent pricing</li>
+                        <li><i class="fas fa-check-circle"></i> No hidden fees</li>
+                        <li><i class="fas fa-check-circle"></i> Free cancellation</li>
+                        <li><i class="fas fa-check-circle"></i> Multiple pickup locations</li>
+                    </ul>
+                    <button class="learn-more-btn">Learn More</button>
+                </div>
             </div>
         </div>
     </section>
@@ -58,7 +166,6 @@
                 <p>Explore our fleet of premium vehicles</p>
             </div>
             <div class="vehicle-container">
-                <!-- Economy Car -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="Economy Car">
@@ -79,7 +186,6 @@
                         <button class="book-now-btn">Book Now</button>
                     </div>
                 </div>
-                <!-- Compact Car -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="Compact Car">
@@ -100,7 +206,6 @@
                         <button class="book-now-btn">Book Now</button>
                     </div>
                 </div>
-                <!-- SUV -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="SUV">
@@ -108,7 +213,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>SUV</h3>
-                            <div class="price">₹5,000<span>/day</span></div>
+                            <div class="price">₹4,500<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Toyota RAV4</div>
@@ -121,7 +226,6 @@
                         <button class="book-now-btn">Book Now</button>
                     </div>
                 </div>
-                <!-- Luxury Car -->
                 <div class="vehicle-card">
                     <div class="vehicle-image">
                         <img src="/placeholder.svg?height=200&width=300" alt="Luxury Car">
@@ -129,7 +233,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Luxury</h3>
-                            <div class="price">₹10,000<span>/day</span></div>
+                            <div class="price">₹7,000<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Mercedes E-Class</div>
@@ -143,63 +247,64 @@
                     </div>
                 </div>
             </div>
-            <div class="view-all-container">
-                <button class="view-all-btn">View All Vehicles</button>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2>Customer Reviews</h2>
+            </div>
+            <div class="reviews-container">
+                <div class="review">
+                    <div class="review-text">"Amazing service, the car was in excellent condition!"</div>
+                    <div class="review-author">- John Doe</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"The booking process was smooth and the car was delivered on time."</div>
+                    <div class="review-author">- Mary Smith</div>
+                </div>
+                <div class="review">
+                    <div class="review-text">"Best car rental experience, I will definitely use them again."</div>
+                    <div class="review-author">- Sarah Lee</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="footer-container">
-            <div class="footer-column">
-                <div class="footer-logo">
-                    <h2><span class="cursive">Car</span> RENTAL</h2>
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact Us</h2>
+                <p>We are here to assist you</p>
+            </div>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
                 </div>
-                <p>We offer a wide range of vehicles for all your driving needs. We have the perfect car to meet your needs.</p>
-                <div class="contact-info">
-                    <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
-                    <p><i class="fas fa-envelope"></i> support@carrentalindia.in</p>
-                    <p><i class="fas fa-map-marker-alt"></i> 45 MG Road, Bengaluru, Karnataka, 560001, India</p>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" required></textarea>
+                    </div>
                 </div>
-            </div>
-            <div class="footer-column">
-                <h3>Company</h3>
-                <ul class="footer-links">
-                    <li><a href="#about">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">How We Work</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">News & Press</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Support</h3>
-                <ul class="footer-links">
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Contact Us</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Sitemap</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Newsletter</h3>
-                <p>Subscribe to our newsletter for updates and offers</p>
-                <form class="newsletter-form">
-                    <input type="email" placeholder="Enter your email" required>
-                    <button type="submit">Subscribe</button>
-                </form>
-                <div class="social-media">
-                    <a href="#"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2025 Car Rental India. All rights reserved.</p>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Car Rental Service. All Rights Reserved.</p>
         </div>
     </footer>
 
