@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-/ Getting references to the modal and forms
+// Getting references to the modal and forms
   const signInForm = document.getElementById("signInForm");
   const registerForm = document.getElementById("registerForm");
   const authModal = document.getElementById("authModal");
