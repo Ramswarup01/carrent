@@ -628,7 +628,7 @@ footer {
 }
 
 .footer-links a:hover {
-  color: #9333ea;
+  color: #007BFF;
 }
 
 .newsletter-form {
@@ -645,7 +645,7 @@ footer {
 
 .newsletter-form button {
   padding: 10px 15px;
-  background-color: #9333ea;
+  background-color: #007BFF;
   color: white;
   border: none;
   border-radius: 0 4px 4px 0;
