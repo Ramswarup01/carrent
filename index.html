@@ -51,83 +51,83 @@
     </section>
 
     <!-- Booking Form Section -->
-    <section class="booking-form" id="booking">
-        <div class="form-container">
-            <h3>Book a car</h3>
-            <form id="carBookingForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pick-up Location</label>
-                        <select id="pickupLocation" required>
-                            <option value="">Select pick-up location</option>
-                            <option value="airport">Airport Terminal</option>
-                            <option value="downtown">Downtown</option>
-                            <option value="north">North Station</option>
-                            <option value="south">South Station</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="dropoffLocation"><i class="fas fa-map-marker-alt"></i> Drop-off Location</label>
-                        <select id="dropoffLocation" required>
-                            <option value="">Select drop-off location</option>
-                            <option value="airport">Airport Terminal</option>
-                            <option value="downtown">Downtown</option>
-                            <option value="north">North Station</option>
-                            <option value="south">South Station</option>
-                        </select>
-                    </div>
+<section class="booking-form" id="booking">
+    <div class="form-container">
+        <h3>Book a car</h3>
+        <form id="carBookingForm">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pick-up Location</label>
+                    <select id="pickupLocation" required>
+                        <option value="">Select pick-up location</option>
+                        <option value="airport">Airport Terminal</option>
+                        <option value="downtown">Downtown</option>
+                        <option value="north">North Station</option>
+                        <option value="south">South Station</option>
+                    </select>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="pickupDate"><i class="fas fa-calendar"></i> Pick-up Date</label>
-                        <input type="date" id="pickupDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickupTime"><i class="fas fa-clock"></i> Pick-up Time</label>
-                        <input type="time" id="pickupTime" required>
-                    </div>
+                <div class="form-group">
+                    <label for="dropoffLocation"><i class="fas fa-map-marker-alt"></i> Drop-off Location</label>
+                    <select id="dropoffLocation" required>
+                        <option value="">Select drop-off location</option>
+                        <option value="airport">Airport Terminal</option>
+                        <option value="downtown">Downtown</option>
+                        <option value="north">North Station</option>
+                        <option value="south">South Station</option>
+                    </select>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="dropoffDate"><i class="fas fa-calendar"></i> Drop-off Date</label>
-                        <input type="date" id="dropoffDate" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dropoffTime"><i class="fas fa-clock"></i> Drop-off Time</label>
-                        <input type="time" id="dropoffTime" required>
-                    </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pickupDate"><i class="fas fa-calendar"></i> Pick-up Date</label>
+                    <input type="date" id="pickupDate" required>
                 </div>
-                <div class="form-row">
-                    <div class="form-group car-type">
-                        <label><i class="fas fa-car"></i> Select Car Type</label>
-                        <div class="car-options">
-                            <div class="car-option">
-                                <input type="radio" id="economy" name="carType" value="economy" checked>
-                                <label for="economy">Economy</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="compact" name="carType" value="compact">
-                                <label for="compact">Compact</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="midsize" name="carType" value="midsize">
-                                <label for="midsize">Mid-size</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="luxury" name="carType" value="luxury">
-                                <label for="luxury">Luxury</label>
-                            </div>
-                            <div class="car-option">
-                                <input type="radio" id="suv" name="carType" value="suv">
-                                <label for="suv">SUV</label>
-                            </div>
+                <div class="form-group">
+                    <label for="pickupTime"><i class="fas fa-clock"></i> Pick-up Time</label>
+                    <input type="time" id="pickupTime" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dropoffDate"><i class="fas fa-calendar"></i> Drop-off Date</label>
+                    <input type="date" id="dropoffDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="dropoffTime"><i class="fas fa-clock"></i> Drop-off Time</label>
+                    <input type="time" id="dropoffTime" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group car-type">
+                    <label><i class="fas fa-car"></i> Select Car Type</label>
+                    <div class="car-options">
+                        <div class="car-option">
+                            <input type="radio" id="economy" name="carType" value="economy" checked>
+                            <label for="economy">Economy</label>
+                        </div>
+                        <div class="car-option">
+                            <input type="radio" id="compact" name="carType" value="compact">
+                            <label for="compact">Compact</label>
+                        </div>
+                        <div class="car-option">
+                            <input type="radio" id="midsize" name="carType" value="midsize">
+                            <label for="midsize">Mid-size</label>
+                        </div>
+                        <div class="car-option">
+                            <input type="radio" id="luxury" name="carType" value="luxury">
+                            <label for="luxury">Luxury</label>
+                        </div>
+                        <div class="car-option">
+                            <input type="radio" id="suv" name="carType" value="suv">
+                            <label for="suv">SUV</label>
                         </div>
                     </div>
                 </div>
-                <button type="submit" class="search-btn">Search</button>
-            </form>
-        </div>
-    </section>
+            </div>
+            <button type="submit" class="search-btn">Search</button>
+        </form>
+    </div>
+</section>
 
     <!-- About Section -->
     <section class="about" id="about">
