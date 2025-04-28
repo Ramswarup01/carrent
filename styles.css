@@ -180,10 +180,9 @@ nav {
 }
 
 .car-image {
-  position: absolute;
   max-width: 100%;
   height: auto;
-  transform: translateX(-20%);
+  transform: translateX(0);
   z-index: 2;
 }
 
