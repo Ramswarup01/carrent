@@ -38,7 +38,7 @@
             <div class="hero-text">
                 <p class="subtitle">Plan your trip now</p>
                 <h2>Save <span class="highlight">BIG</span> With Our Car Rental</h2>
-                <p class="description">Rent the car of your dreams. Unbeatable prices, flexible pick-up options, and much more.</p>
+                <p class="description">Rent the car of your dreams. Unbeatable prices, flexible pick-up options and much more.</p>
                 <div class="cta-buttons">
                     <button class="book-ride">Book Ride</button>
                     <button class="learn-more">Learn More</button>
@@ -173,7 +173,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Economy</h3>
-                            <div class="price">₹2,000<span>/day</span></div>
+                            <div class="price">$45<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Toyota Yaris</div>
@@ -193,7 +193,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Compact</h3>
-                            <div class="price">₹2,500<span>/day</span></div>
+                            <div class="price">$55<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Honda Civic</div>
@@ -213,7 +213,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>SUV</h3>
-                            <div class="price">₹4,500<span>/day</span></div>
+                            <div class="price">$85<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Toyota RAV4</div>
@@ -233,7 +233,7 @@
                     <div class="vehicle-details">
                         <div class="vehicle-info">
                             <h3>Luxury</h3>
-                            <div class="price">₹7,000<span>/day</span></div>
+                            <div class="price">$120<span>/day</span></div>
                         </div>
                         <div class="vehicle-specs">
                             <div class="spec"><i class="fas fa-car"></i> Mercedes E-Class</div>
@@ -247,6 +247,9 @@
                     </div>
                 </div>
             </div>
+            <div class="view-all-container">
+                <button class="view-all-btn">View All Vehicles</button>
+            </div>
         </div>
     </section>
 
@@ -255,56 +258,132 @@
         <div class="container">
             <div class="section-title">
                 <h2>Customer Reviews</h2>
+                <p>What our customers say about us</p>
             </div>
-            <div class="reviews-container">
-                <div class="review">
-                    <div class="review-text">"Amazing service, the car was in excellent condition!"</div>
-                    <div class="review-author">- John Doe</div>
+            <div class="reviews-slider">
+                <div class="slider-controls">
+                    <button class="prev-btn" id="prevReview"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-btn" id="nextReview"><i class="fas fa-chevron-right"></i></button>
                 </div>
-                <div class="review">
-                    <div class="review-text">"The booking process was smooth and the car was delivered on time."</div>
-                    <div class="review-author">- Mary Smith</div>
+                <div class="reviews-container" id="reviewsContainer">
+                    <div class="review-card active">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The car was in excellent condition and the rental process was smooth and hassle-free. I would definitely use their services again!"</p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>John Smith</h4>
+                                <p>New York</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="review-text">"Great customer service and competitive prices. The car was clean and well-maintained. I highly recommend this car rental service."</p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Emily Johnson</h4>
+                                <p>Chicago</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"I've rented from many companies before, but this one stands out for their exceptional service and quality vehicles. Will definitely be my go-to rental company from now on."</p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Michael Brown</h4>
+                                <p>Los Angeles</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="review">
-                    <div class="review-text">"Best car rental experience, I will definitely use them again."</div>
-                    <div class="review-author">- Sarah Lee</div>
+                <div class="review-dots" id="reviewDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contact Us</h2>
-                <p>We are here to assist you</p>
+   <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <h2><span class="cursive">Car</span> RENTAL</h2>
+                </div>
+                <p>We offer a wide range of vehicles for all your driving needs. We have the perfect car to meet your needs.</p>
+                <div class="contact-info">
+                    <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> support@carrentalindia.in</p>
+                    <p><i class="fas fa-map-marker-alt"></i> 45 MG Road, Bengaluru, Karnataka, 560001, India</p>
+                </div>
             </div>
-            <form id="contactForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" required>
-                    </div>
+            <div class="footer-column">
+                <h3>Company</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">How We Work</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">News & Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Sitemap</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Newsletter</h3>
+                <p>Subscribe to our newsletter for updates and offers</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Enter your email" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+                <div class="social-media">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" required></textarea>
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
+            </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 Car Rental Service. All Rights Reserved.</p>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Car Rental India. All rights reserved.</p>
         </div>
     </footer>
 
