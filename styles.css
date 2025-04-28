@@ -214,24 +214,26 @@ nav {
 
 /* Car Type Options - Horizontal Layout (added) */
 .car-options {
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+    display: flex; 
+    gap: 20px; 
+    flex-wrap: wrap;
 }
 
 .car-option {
-  display: flex;
-  align-items: center;
-}
-
-.car-option input[type="radio"] {
-  margin-right: 8px;
+    display: flex;
+    align-items: center; 
 }
 
 .car-option label {
-  font-size: 16px;
+    font-size: 1rem;
+    padding-left: 8px; 
+    white-space: nowrap; 
 }
 
+.car-option input {
+    width: 20px; 
+    height: 20px;
+}
 
 .form-container {
   max-width: 1200px;
