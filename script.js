@@ -1,3 +1,8 @@
+Backendless.initApp(
+  "A33C4544-3EA3-40F5-9373-C30AD3163696",
+  "00582F4D-AA36-4053-8D41-2C6C9F9C4F03"
+);
+
 document.addEventListener("DOMContentLoaded", () => {
   // Mobile menu toggle
   const mobileMenuBtn = document.getElementById("mobileMenuBtn")
