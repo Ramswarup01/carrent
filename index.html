@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Rental Service</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
@@ -32,43 +32,46 @@
         </div>
     </header>
 
-<!-- Sign-In & Register Modal -->
-<div id="authModal" class="modal">
-  <div class="modal-content">
-    <!-- Sign In Form -->
-    <div id="signInForm">
-      <h2>Sign In</h2>
-      <form id="signIn">
-        <label for="signInEmail">Email</label>
-        <input type="email" id="signInEmail" name="email" required placeholder="Enter your email">
-        
-        <label for="signInPassword">Password</label>
-        <input type="password" id="signInPassword" name="password" required placeholder="Enter your password">
-        
-        <button type="submit">Sign In</button>
-      </form>
-      <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+    <!-- Sign-In & Register Modal -->
+    <div id="authModal" class="modal">
+      <div class="modal-content">
+        <!-- Sign In Form -->
+        <div id="signInForm">
+          <h2>Sign In</h2>
+          <form id="signIn">
+            <label for="signInEmail">Email</label>
+            <input type="email" id="signInEmail" name="email" required placeholder="Enter your email">
+            
+            <label for="signInPassword">Password</label>
+            <input type="password" id="signInPassword" name="password" required placeholder="Enter your password">
+            
+            <button type="submit">Sign In</button>
+          </form>
+          <p>Don't have an account? <a href="#" id="showRegister">Register here</a></p>
+        </div>
+
+        <!-- Register Form -->
+        <div id="registerForm" style="display: none;">
+          <h2>Register</h2>
+          <form id="register">
+            <label for="registerName">Full Name</label>
+            <input type="text" id="registerName" name="name" required placeholder="Enter your full name">
+
+            <label for="registerEmail">Email</label>
+            <input type="email" id="registerEmail" name="email" required placeholder="Enter your email">
+
+            <label for="registerContact">Contact Number</label>
+            <input type="text" id="registerContact" name="contact" required placeholder="Enter your contact number">
+
+            <label for="registerPassword">Password</label>
+            <input type="password" id="registerPassword" name="password" required placeholder="Enter your password">
+
+            <button type="submit">Register</button>
+          </form>
+          <p>Already have an account? <a href="#" id="showSignIn">Sign in here</a></p>
+        </div>
+      </div>
     </div>
-
-    <!-- Register Form -->
-    <div id="registerForm" style="display: none;">
-      <h2>Register</h2>
-      <form id="register">
-        <label for="registerName">Full Name</label>
-        <input type="text" id="registerName" name="name" required placeholder="Enter your full name">
-
-        <label for="registerEmail">Email</label>
-        <input type="email" id="registerEmail" name="email" required placeholder="Enter your email">
-
-        <label for="registerPassword">Password</label>
-        <input type="password" id="registerPassword" name="password" required placeholder="Enter your password">
-
-        <button type="submit">Register</button>
-      </form>
-      <p>Already have an account? <a href="#" id="showSignIn">Sign in here</a></p>
-    </div>
-  </div>
-</div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -83,94 +86,72 @@
                 </div>
             </div>
             <div class="hero-image">
-<!--                 img src="https://www.freepik.com/free-vector/car-rental-concept-illustration_26234498.htm#fromView=keyword&page=1&position=0&uuid=e0fcc8de-fb2a-4055-b0a9-d2fe88aabd60&query=Car+Rental" alt="Red Mazda car" class="car-image" -->
-<!--                 img src="car.png" alt="Red Mazda car" class="car-image" -->
                 <img src="car.png" alt="Red Mazda car" class="car-image">
             </div>
         </div>
     </section>
 
-<!-- Booking Form Section -->
-<section class="booking-form" id="booking">
-    <div class="form-container">
-        <h3>Book a car</h3>
-        <form id="carBookingForm">
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pick-up Location</label>
-                    <select id="pickupLocation" required>
-                        <option value="">Select pick-up location</option>
-                        <option value="delhi_airport">Indira Gandhi International Airport (Delhi)</option>
-                        <option value="mumbai_airport">Chhatrapati Shivaji Maharaj International Airport (Mumbai)</option>
-                        <option value="bangalore">Bangalore City</option>
-                        <option value="chennai">Chennai Central</option>
-                        <option value="kolkata">Howrah Railway Station (Kolkata)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="dropoffLocation"><i class="fas fa-map-marker-alt"></i> Drop-off Location</label>
-                    <select id="dropoffLocation" required>
-                        <option value="">Select drop-off location</option>
-                        <option value="delhi_airport">Indira Gandhi International Airport (Delhi)</option>
-                        <option value="mumbai_airport">Chhatrapati Shivaji Maharaj International Airport (Mumbai)</option>
-                        <option value="bangalore">Bangalore City</option>
-                        <option value="chennai">Chennai Central</option>
-                        <option value="kolkata">Howrah Railway Station (Kolkata)</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="pickupDate"><i class="fas fa-calendar"></i> Pick-up Date</label>
-                    <input type="date" id="pickupDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="pickupTime"><i class="fas fa-clock"></i> Pick-up Time</label>
-                    <input type="time" id="pickupTime" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="dropoffDate"><i class="fas fa-calendar"></i> Drop-off Date</label>
-                    <input type="date" id="dropoffDate" required>
-                </div>
-                <div class="form-group">
-                    <label for="dropoffTime"><i class="fas fa-clock"></i> Drop-off Time</label>
-                    <input type="time" id="dropoffTime" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group car-type">
-                    <label><i class="fas fa-car"></i> Select Car Type</label>
-                    <div class="car-options">
-                        <div class="car-option">
-                            <input type="radio" id="economy" name="carType" value="economy" checked>
-                            <label for="economy">Economy</label>
-                        </div>
-                        <div class="car-option">
-                            <input type="radio" id="compact" name="carType" value="compact">
-                            <label for="compact">Compact</label>
-                        </div>
-                        <div class="car-option">
-                            <input type="radio" id="midsize" name="carType" value="midsize">
-                            <label for="midsize">Mid-size</label>
-                        </div>
-                        <div class="car-option">
-                            <input type="radio" id="luxury" name="carType" value="luxury">
-                            <label for="luxury">Luxury</label>
-                        </div>
-                        <div class="car-option">
-                            <input type="radio" id="suv" name="carType" value="suv">
-                            <label for="suv">SUV</label>
-                        </div>
+    <!-- Booking Form Section -->
+    <section class="booking-form" id="booking">
+        <div class="form-container">
+            <h3>Book a car</h3>
+            <form id="carBookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pickupLocation"><i class="fas fa-map-marker-alt"></i> Pick-up Location</label>
+                        <select id="pickupLocation" required>
+                            <option value="">Select pick-up location</option>
+                            <option value="delhi_airport">Indira Gandhi International Airport (Delhi)</option>
+                            <option value="mumbai_airport">Chhatrapati Shivaji Maharaj International Airport (Mumbai)</option>
+                            <option value="bangalore">Bangalore City</option>
+                            <option value="chennai">Chennai Central</option>
+                            <option value="kolkata">Howrah Railway Station (Kolkata)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dropoffLocation"><i class="fas fa-map-marker-alt"></i> Drop-off Location</label>
+                        <select id="dropoffLocation" required>
+                            <option value="">Select drop-off location</option>
+                            <option value="delhi_airport">Indira Gandhi International Airport (Delhi)</option>
+                            <option value="mumbai_airport">Chhatrapati Shivaji Maharaj International Airport (Mumbai)</option>
+                            <option value="bangalore">Bangalore City</option>
+                            <option value="chennai">Chennai Central</option>
+                            <option value="kolkata">Howrah Railway Station (Kolkata)</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="search-btn">Search</button>
-        </form>
-    </div>
-</section>
-
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="pickupDate"><i class="fas fa-calendar"></i> Pick-up Date</label>
+                        <input type="date" id="pickupDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="pickupTime"><i class="fas fa-clock"></i> Pick-up Time</label>
+                        <input type="time" id="pickupTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dropoffDate"><i class="fas fa-calendar"></i> Drop-off Date</label>
+                        <input type="date" id="dropoffDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dropoffTime"><i class="fas fa-clock"></i> Drop-off Time</label>
+                        <input type="time" id="dropoffTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="carTypeSelect"><i class="fas fa-car"></i> Select Car Type</label>
+                        <select id="carTypeSelect" required>
+                            <option value="">Choose car type...</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="search-btn">Search</button>
+            </form>
+        </div>
+    </section>
 
     <!-- About Section -->
     <section class="about" id="about">
@@ -201,206 +182,99 @@
         </div>
     </section>
 
-<!-- Vehicle Models Section -->
-<section class="vehicles" id="vehicles">
-    <div class="container">
-        <div class="section-title">
-            <h2>Vehicle Models</h2>
-            <p>Explore our fleet of premium vehicles</p>
-        </div>
-        <div class="vehicle-container" id="vehicleContainer"></div>
-<!--         <div class="vehicle-container">
-            <div class="vehicle-card">
-                <div class="vehicle-image">
-                    <img src="eco.png" alt="Toyota Yaris">
-                </div>
-                <div class="vehicle-details">
-                    <div class="vehicle-info">
-                        <h3>Economy</h3>
-                        <div class="price">₹3,500<span>/day</span></div>
-                    </div>
-                    <div class="vehicle-specs">
-                        <div class="spec"><i class="fas fa-car"></i> Toyota Yaris</div>
-                        <div class="spec"><i class="fas fa-door-open"></i> 4 Doors</div>
-                        <div class="spec"><i class="fas fa-user"></i> 5 Seats</div>
-                        <div class="spec"><i class="fas fa-gas-pump"></i> Petrol</div>
-                        <div class="spec"><i class="fas fa-cog"></i> Automatic</div>
-                        <div class="spec"><i class="fas fa-snowflake"></i> A/C</div>
-                    </div>
-                    <button class="book-now-btn">Book Now</button>
-                </div>
+    <!-- Vehicle Models Section -->
+    <section class="vehicles" id="vehicles">
+        <div class="container">
+            <div class="section-title">
+                <h2>Vehicle Models</h2>
+                <p>Explore our fleet of premium vehicles</p>
             </div>
-
-            <div class="vehicle-card">
-                <div class="vehicle-image">
-                    <img src="sedan.png" alt="Honda Civic">
-                </div>
-                <div class="vehicle-details">
-                    <div class="vehicle-info">
-                        <h3>Compact</h3>
-                        <div class="price">₹4,000<span>/day</span></div>
-                    </div>
-                    <div class="vehicle-specs">
-                        <div class="spec"><i class="fas fa-car"></i> Honda Civic</div>
-                        <div class="spec"><i class="fas fa-door-open"></i> 4 Doors</div>
-                        <div class="spec"><i class="fas fa-user"></i> 5 Seats</div>
-                        <div class="spec"><i class="fas fa-gas-pump"></i> Diesel</div>
-                        <div class="spec"><i class="fas fa-cog"></i> Automatic</div>
-                        <div class="spec"><i class="fas fa-snowflake"></i> A/C</div>
-                    </div>
-                    <button class="book-now-btn">Book Now</button>
-                </div>
-            </div>
-
-            <div class="vehicle-card">
-                <div class="vehicle-image">
-                    <img src="mpv.png" alt="Toyota Innova">
-                </div>
-                <div class="vehicle-details">
-                    <div class="vehicle-info">
-                        <h3>SUV</h3>
-                        <div class="price">₹6,500<span>/day</span></div>
-                    </div>
-                    <div class="vehicle-specs">
-                        <div class="spec"><i class="fas fa-car"></i> Toyota Innova</div>
-                        <div class="spec"><i class="fas fa-door-open"></i> 5 Doors</div>
-                        <div class="spec"><i class="fas fa-user"></i> 7 Seats</div>
-                        <div class="spec"><i class="fas fa-gas-pump"></i> Petrol</div>
-                        <div class="spec"><i class="fas fa-cog"></i> Automatic</div>
-                        <div class="spec"><i class="fas fa-snowflake"></i> A/C</div>
-                    </div>
-                    <button class="book-now-btn">Book Now</button>
-                </div>
-            </div>
-
-            <div class="vehicle-card">
-                <div class="vehicle-image">
-                    <img src="suv.png" alt="Toyota Fortuner">
-                </div>
-                <div class="vehicle-details">
-                    <div class="vehicle-info">
-                        <h3>SUV</h3>
-                        <div class="price">₹9,000<span>/day</span></div>
-                    </div>
-                    <div class="vehicle-specs">
-                        <div class="spec"><i class="fas fa-car"></i> Toyota Fortuner</div>
-                        <div class="spec"><i class="fas fa-door-open"></i> 5 Doors</div>
-                        <div class="spec"><i class="fas fa-user"></i> 7 Seats</div>
-                        <div class="spec"><i class="fas fa-gas-pump"></i> Diesel</div>
-                        <div class="spec"><i class="fas fa-cog"></i> Automatic</div>
-                        <div class="spec"><i class="fas fa-snowflake"></i> A/C</div>
-                    </div>
-                    <button class="book-now-btn">Book Now</button>
-                </div>
-            </div>
-
-            <div class="vehicle-card">
-                <div class="vehicle-image">
-                    <img src="lux.png" alt="Mercedes E-Class">
-                </div>
-                <div class="vehicle-details">
-                    <div class="vehicle-info">
-                        <h3>Luxury</h3>
-                        <div class="price">₹15,000<span>/day</span></div>
-                    </div>
-                    <div class="vehicle-specs">
-                        <div class="spec"><i class="fas fa-car"></i> Mercedes E-Class</div>
-                        <div class="spec"><i class="fas fa-door-open"></i> 4 Doors</div>
-                        <div class="spec"><i class="fas fa-user"></i> 5 Seats</div>
-                        <div class="spec"><i class="fas fa-gas-pump"></i> Diesel</div>
-                        <div class="spec"><i class="fas fa-cog"></i> Automatic</div>
-                        <div class="spec"><i class="fas fa-snowflake"></i> A/C</div>
-                    </div>
-                    <button class="book-now-btn">Book Now</button>
-                </div>
-            </div>
-        </div> -->
-        <div class="view-all-container">
-            <button class="view-all-btn">View All Vehicles</button>
-        </div>
-    </div>
-</section>
-
-  <!-- Reviews Section -->
-<section class="reviews" id="reviews">
-    <div class="container">
-        <div class="section-title">
-            <h2>Customer Reviews</h2>
-            <p>What our customers say about us</p>
-        </div>
-        <div class="reviews-slider">
-            <div class="slider-controls">
-                <button class="prev-btn" id="prevReview"><i class="fas fa-chevron-left"></i></button>
-                <button class="next-btn" id="nextReview"><i class="fas fa-chevron-right"></i></button>
-            </div>
-            <div class="reviews-container" id="reviewsContainer">
-                <div class="review-card active">
-                    <div class="review-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="review-text">"The car was in excellent condition and the rental process was smooth and hassle-free. I would definitely use their services again!"</p>
-                    <div class="reviewer">
-                        <div class="reviewer-image">
-                            <img src="reviewer.jpg" alt="Reviewer">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4>Ravi Kumar</h4>
-                            <p>Mumbai</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="review-text">"Great customer service and competitive prices. The car was clean and well-maintained. I highly recommend this car rental service."</p>
-                    <div class="reviewer">
-                        <div class="reviewer-image">
-                            <img src="reviewer.jpg" alt="Reviewer">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4>Priya Sharma</h4>
-                            <p>Delhi</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="review-rating">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="review-text">"I've rented from many companies before, but this one stands out for their exceptional service and quality vehicles. Will definitely be my go-to rental company from now on."</p>
-                    <div class="reviewer">
-                        <div class="reviewer-image">
-                            <img src="/placeholder.svg?height=60&width=60" alt="Reviewer">
-                        </div>
-                        <div class="reviewer-info">
-                            <h4>Arjun Reddy</h4>
-                            <p>Bangalore</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="review-dots" id="reviewDots">
-                <span class="dot active" data-index="0"></span>
-                <span class="dot" data-index="1"></span>
-                <span class="dot" data-index="2"></span>
+            <div class="vehicle-container" id="vehicleContainer"></div>
+            <div class="view-all-container">
+                <button class="view-all-btn">View All Vehicles</button>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <!-- Reviews Section -->
+    <section class="reviews" id="reviews">
+        <div class="container">
+            <div class="section-title">
+                <h2>Customer Reviews</h2>
+                <p>What our customers say about us</p>
+            </div>
+            <div class="reviews-slider">
+                <div class="slider-controls">
+                    <button class="prev-btn" id="prevReview"><i class="fas fa-chevron-left"></i></button>
+                    <button class="next-btn" id="nextReview"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="reviews-container" id="reviewsContainer">
+                    <div class="review-card active">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"The car was in excellent condition and the rental process was smooth and hassle-free. I would definitely use their services again!"</p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="reviewer.jpg" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Ravi Kumar</h4>
+                                <p>Mumbai</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="review-text">"Great customer service and competitive prices. The car was clean and well-maintained. I highly recommend this car rental service."</p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="reviewer.jpg" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Priya Sharma</h4>
+                                <p>Delhi</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="review-card">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">"I've rented from many companies before, but this one stands out for their exceptional service and quality vehicles. Will definitely be my go-to rental company from now on."</p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="reviewer-image" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Arjun Reddy</h4>
+                                <p>Bangalore</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="review-dots" id="reviewDots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer id="contact">
@@ -414,7 +288,6 @@
                     <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
                     <p><i class="fas fa-envelope"></i> support@carrentalindia.in</p>
                     <p><i class="fas fa-map-marker-alt"></i> 45 MG Road, Bengaluru, Karnataka, 560001, India</p>
-
                 </div>
             </div>
             <div class="footer-column">
@@ -458,6 +331,5 @@
     </footer>
 
     <script src="script.js"></script>
-    <script src="https://api.backendless.com/sdk/js/latest/backendless.min.js"></script>
 </body>
 </html>
