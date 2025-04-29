@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "00582F4D-AA36-4053-8D41-2C6C9F9C4F03"
   );
 
-  // ----- Mobile menu toggle -----
+  // ----- Mobile Menu Toggle -----
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const navLinks = document.getElementById("navLinks");
 
@@ -13,17 +13,12 @@ document.addEventListener("DOMContentLoaded", () => {
     mobileMenuBtn.addEventListener("click", () => {
       navLinks.classList.toggle("active");
       const icon = mobileMenuBtn.querySelector("i");
-      if (icon.classList.contains("fa-bars")) {
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-times");
-      } else {
-        icon.classList.remove("fa-times");
-        icon.classList.add("fa-bars");
-      }
+      icon.classList.toggle("fa-bars");
+      icon.classList.toggle("fa-times");
     });
   }
 
-  // ----- Smooth scrolling for navigation links -----
+  // ----- Smooth Scrolling for Navigation Links -----
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -48,21 +43,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // ----- Authentication UI Elements -----
+  const authModal = document.getElementById("authModal");
   const signInFormDiv = document.getElementById("signInForm");
   const registerFormDiv = document.getElementById("registerForm");
-  const authModal = document.getElementById("authModal");
   const showRegisterBtn = document.getElementById("showRegister");
   const showSignInBtn = document.getElementById("showSignIn");
   const signInBtn = document.querySelector(".sign-in");
   const registerBtn = document.querySelector(".register");
-  const authButtons = document.querySelector(".auth-buttons");
 
-  // ----- Open/Close Auth Modal -----
   function openAuthModal() {
     authModal.style.display = "block";
   }
   function closeAuthModal() {
     authModal.style.display = "none";
+  }
+  function showRegisterForm() {
+    signInFormDiv.style.display = "none";
+    registerFormDiv.style.display = "block";
+  }
+  function showSignInForm() {
+    registerFormDiv.style.display = "none";
+    signInFormDiv.style.display = "block";
   }
 
   if (signInBtn) signInBtn.addEventListener("click", () => {
@@ -79,7 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === authModal) closeAuthModal();
   });
 
-  // ----- Switch Auth Forms -----
   showRegisterBtn.addEventListener("click", (e) => {
     e.preventDefault();
     showRegisterForm();
@@ -90,44 +90,31 @@ document.addEventListener("DOMContentLoaded", () => {
     showSignInForm();
   });
 
-  function showRegisterForm() {
-    signInFormDiv.style.display = "none";
-    registerFormDiv.style.display = "block";
-  }
-  function showSignInForm() {
-    registerFormDiv.style.display = "none";
-    signInFormDiv.style.display = "block";
-  }
-
   // ----- User Session Management -----
   function updateUIForUser(user) {
     const authButtons = document.querySelector(".auth-buttons");
     if (user) {
       authButtons.style.display = "flex";
 
-      // Hide Sign In and Register buttons explicitly if there is logout btn
       const signInBtn = authButtons.querySelector(".sign-in");
       const registerBtn = authButtons.querySelector(".register");
       if (signInBtn) signInBtn.style.display = "none";
       if (registerBtn) registerBtn.style.display = "none";
 
-      createLogoutButton(); // add logout button if missing
+      createLogoutButton();
     } else {
       authButtons.style.display = "flex";
 
-      // Show Sign In and Register buttons
       const signInBtn = authButtons.querySelector(".sign-in");
       const registerBtn = authButtons.querySelector(".register");
       if (signInBtn) signInBtn.style.display = "inline-block";
       if (registerBtn) registerBtn.style.display = "inline-block";
 
-      // Remove logout button if any
       const logoutBtn = document.getElementById("logoutBtn");
       if (logoutBtn) logoutBtn.remove();
     }
   }
 
-  // Check if user is already logged in on page load
   Backendless.UserService.isValidLogin().then((isValid) => {
     if (isValid) {
       Backendless.UserService.getCurrentUser().then((user) => {
@@ -322,16 +309,13 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Check for overlapping bookings of this user
         const whereClause = `
           custld = '${currentUser.objectId}' AND
           pickupDatetime <= '${dropoffDateTime.toISOString()}' AND
           dropDatetime >= '${pickupDateTime.toISOString()}'
         `;
 
-        const overlappingBookings = await Backendless.Data.of("bookings").find({
-          whereClause: whereClause,
-        });
+        const overlappingBookings = await Backendless.Data.of("bookings").find({ whereClause });
 
         if (overlappingBookings.length > 0) {
           alert("You already have a booking during this period. Please finish or cancel it before making a new booking.");
@@ -358,7 +342,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Booking date min setup (your existing logic)
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("pickupDate").min = today;
     document.getElementById("dropoffDate").min = today;
@@ -369,88 +352,5 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("dropoffDate").value = this.value;
       }
     });
-  }
-
-
-  
-
-
-
-
-// Getting references to the modal and forms
-  const signInForm = document.getElementById("signInForm");
-  const registerForm = document.getElementById("registerForm");
-  const authModal = document.getElementById("authModal");
-  const showRegisterBtn = document.getElementById("showRegister");
-  const showSignInBtn = document.getElementById("showSignIn");
-
-  // Open the modal
-  const openAuthModal = () => {
-    authModal.style.display = "block";
-  };
-
-  // Close the modal
-  const closeAuthModal = () => {
-    authModal.style.display = "none";
-  };
-
-  // Show Register form
-  showRegisterBtn.addEventListener("click", () => {
-    signInForm.style.display = "none";
-    registerForm.style.display = "block";
-  });
-
-  // Show Sign In form
-  showSignInBtn.addEventListener("click", () => {
-    registerForm.style.display = "none";
-    signInForm.style.display = "block";
-  });
-
-  // Close the modal when clicking outside of it
-  window.addEventListener("click", (e) => {
-    if (e.target === authModal) {
-      closeAuthModal();
-    }
-  });
-
-  // Form validation (basic frontend validation)
-  const signIn = document.getElementById("signIn");
-  const register = document.getElementById("register");
-
-  // Sign-In form submission
-  signIn && signIn.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const email = document.getElementById("signInEmail").value;
-    const password = document.getElementById("signInPassword").value;
-
-    if (!email || !password) {
-      alert("Please fill in all fields!");
-      return;
-    }
-
-    // Mock sign-in (just for frontend validation)
-    alert(`Signing in with: ${email}`);
-  });
-
-  // Register form submission
-  register && register.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const name = document.getElementById("registerName").value;
-    const email = document.getElementById("registerEmail").value;
-    const password = document.getElementById("registerPassword").value;
-
-    if (!name || !email || !password) {
-      alert("Please fill in all fields!");
-      return;
-    }
-
-    // Mock registration (just for frontend validation)
-    alert(`Registering with: ${name}, ${email}`);
-  });
-
-  // Example of opening the modal (you can trigger this on a button click or link)
-  const signInLink = document.getElementById("signInLink");
-  if (signInLink) {
-    signInLink.addEventListener("click", openAuthModal);
   }
 });
