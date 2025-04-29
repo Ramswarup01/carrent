@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const card = document.createElement("div");
         card.className = "vehicle-card";
 
-        const imageUrl = vehicle.imageUrl || "default-car.png";
+        const imageUrl = vehicle.imageUrl || "placeholder.svg";
 
         card.innerHTML = `
           <div class="vehicle-image">
