@@ -251,7 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <div class="vehicle-details">
             <div class="vehicle-info">
               <h3>${vehicle.model}</h3>
-              // <div>${vehicle.carType}</div>
               <div class="price">₹${vehicle.price}<span>/day</span></div>
             </div>
             <div class="vehicle-specs">
