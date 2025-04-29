@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "00582F4D-AA36-4053-8D41-2C6C9F9C4F03"
   );
 
-  // ----- Mobile Menu Toggle -----
+  // ----- Mobile menu toggle -----
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const navLinks = document.getElementById("navLinks");
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----- Smooth Scrolling for Navigation Links -----
+  // ----- Smooth scrolling for navigation links -----
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -132,9 +132,10 @@ document.addEventListener("DOMContentLoaded", () => {
       e.preventDefault();
       const name = document.getElementById("registerName").value.trim();
       const email = document.getElementById("registerEmail").value.trim();
-      const password = document.getElementById("registerPassword").value;
+      const contact = document.getElementById("registerContact").value.trim();
+      const password = document.getElementById("registerPassword").value.trim();
 
-      if (!name || !email || !password) {
+      if (!name || !email || !contact || !password) {
         alert("Please fill in all fields!");
         return;
       }
@@ -144,6 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
         user.email = email;
         user.password = password;
         user.name = name;
+        user.contact = contact;
 
         const registeredUser = await Backendless.UserService.register(user);
         alert(`Registered successfully: ${registeredUser.email}`);
@@ -211,20 +213,31 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // ----- Fetch and Render Vehicles Dynamically -----
-  async function loadVehicles() {
+  async function loadVehicles(showAll = false) {
     const vehicleContainer = document.getElementById("vehicleContainer");
+    const carTypeSelect = document.getElementById("carTypeSelect");
     if (!vehicleContainer) return;
 
     try {
       const vehicles = await Backendless.Data.of("vehicles").find();
 
       vehicleContainer.innerHTML = ""; // Clear previous vehicles
-
-      vehicles.forEach((vehicle) => {
+      carTypeSelect.innerHTML = '<option value="">Choose car type...</option>'; // Reset car types
+    
+      const vehiclesToShow = showAll ? vehicles : vehicles.slice(0, 3);
+      vehiclesToShow.forEach((vehicle) => {
         const card = document.createElement("div");
         card.className = "vehicle-card";
 
         const imageUrl = vehicle.imageUrl || "placeholder.svg";
+
+        // Fill in vehicle options for selection
+        if (!showAll) {
+          const option = document.createElement("option");
+          option.value = vehicle.carType;
+          option.textContent = vehicle.carType;
+          carTypeSelect.appendChild(option);
+        }
 
         card.innerHTML = `
           <div class="vehicle-image">
@@ -232,7 +245,8 @@ document.addEventListener("DOMContentLoaded", () => {
           </div>
           <div class="vehicle-details">
             <div class="vehicle-info">
-              <h3>${vehicle.carType}</h3>
+              <h3>${vehicle.model}</h3>
+              <div>${vehicle.carType}</div>
               <div class="price">₹${vehicle.price}<span>/day</span></div>
             </div>
             <div class="vehicle-specs">
@@ -251,11 +265,12 @@ document.addEventListener("DOMContentLoaded", () => {
       bookNowBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           const selectedCarType = btn.getAttribute("data-car-type");
-          const carTypeRadio = document.querySelector(`input[name="carType"][value="${selectedCarType}"]`);
-          if (carTypeRadio) carTypeRadio.checked = true;
+          const carTypeRadio = carTypeSelect.querySelector(`option[value="${selectedCarType}"]`);
+          if (carTypeRadio) carTypeRadio.selected = true;
 
           const bookingFormSection = document.getElementById("booking");
           if (bookingFormSection) {
+            bookingFormSection.style.display = "block"; // Show booking form
             window.scrollTo({
               top: bookingFormSection.offsetTop - 70,
               behavior: "smooth",
@@ -263,11 +278,42 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         });
       });
+
+      const viewAllBtn = document.querySelector(".view-all-btn");
+      if (viewAllBtn) {
+        viewAllBtn.style.display = showAll ? "none" : "block";
+        viewAllBtn.addEventListener("click", () => loadVehicles(true));
+      }
+
     } catch (error) {
       console.error("Error loading vehicles:", error);
     }
   }
   loadVehicles();
+
+  // ----- Review Slider Functionality -----
+  let currentReviewIndex = 0;
+  const reviews = document.querySelectorAll('.review-card');
+  const dots = document.querySelectorAll('.review-dots .dot');
+
+  function showReview(index) {
+    reviews.forEach((review, i) => {
+      review.style.display = (i === index) ? "block" : "none";
+      dots[i].classList.toggle("active", i === index);
+    });
+  }
+
+  document.getElementById("prevReview").addEventListener("click", () => {
+    currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+    showReview(currentReviewIndex);
+  });
+
+  document.getElementById("nextReview").addEventListener("click", () => {
+    currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+    showReview(currentReviewIndex);
+  });
+
+  showReview(currentReviewIndex); // Initialize the first review
 
   // ----- Booking Form Submission with Overlap Validation -----
   const bookingForm = document.getElementById("carBookingForm");
@@ -282,9 +328,9 @@ document.addEventListener("DOMContentLoaded", () => {
       const pickupTime = document.getElementById("pickupTime").value;
       const dropoffDate = document.getElementById("dropoffDate").value;
       const dropoffTime = document.getElementById("dropoffTime").value;
-      const carType = document.querySelector('input[name="carType"]:checked').value;
+      const carType = document.getElementById("carTypeSelect").value;
 
-      if (!pickupLocation || !dropoffLocation || !pickupDate || !pickupTime || !dropoffDate || !dropoffTime) {
+      if (!pickupLocation || !dropoffLocation || !pickupDate || !pickupTime || !dropoffDate || !dropoffTime || !carType) {
         alert("Please fill in all required fields");
         return;
       }
