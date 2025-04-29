@@ -101,18 +101,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----- User Session Management -----
   function updateUIForUser(user) {
+    const authButtons = document.querySelector(".auth-buttons");
     if (user) {
-      authButtons.style.display = "none";
-      // Optionally show user info or logout button here
+      authButtons.style.display = "flex";
+
+      // Hide Sign In and Register buttons explicitly if there is logout btn
+      const signInBtn = authButtons.querySelector(".sign-in");
+      const registerBtn = authButtons.querySelector(".register");
+      if (signInBtn) signInBtn.style.display = "none";
+      if (registerBtn) registerBtn.style.display = "none";
+
+      createLogoutButton(); // add logout button if missing
     } else {
       authButtons.style.display = "flex";
+
+      // Show Sign In and Register buttons
+      const signInBtn = authButtons.querySelector(".sign-in");
+      const registerBtn = authButtons.querySelector(".register");
+      if (signInBtn) signInBtn.style.display = "inline-block";
+      if (registerBtn) registerBtn.style.display = "inline-block";
+
+      // Remove logout button if any
+      const logoutBtn = document.getElementById("logoutBtn");
+      if (logoutBtn) logoutBtn.remove();
     }
   }
 
-  // Check if user is already logged in
-  Backendless.UserService.isValidLogin().then(isValid => {
+  // Check if user is already logged in on page load
+  Backendless.UserService.isValidLogin().then((isValid) => {
     if (isValid) {
-      Backendless.UserService.getCurrentUser().then(user => {
+      Backendless.UserService.getCurrentUser().then((user) => {
         updateUIForUser(user);
       });
     } else {
@@ -175,13 +193,102 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----- Booking Form Submission -----
+  // ----- Logout Button & Session Management -----
+  function createLogoutButton() {
+    const authButtons = document.querySelector(".auth-buttons");
+    let logoutBtn = document.getElementById("logoutBtn");
+    if (!logoutBtn) {
+      logoutBtn = document.createElement("button");
+      logoutBtn.id = "logoutBtn";
+      logoutBtn.textContent = "Logout";
+      logoutBtn.style.backgroundColor = "white";
+      logoutBtn.style.color = "#007BFF";
+      logoutBtn.style.border = "none";
+      logoutBtn.style.padding = "0.5rem 1.2rem";
+      logoutBtn.style.borderRadius = "4px";
+      logoutBtn.style.cursor = "pointer";
+      logoutBtn.style.fontWeight = "500";
+      logoutBtn.style.marginLeft = "10px";
+      authButtons.appendChild(logoutBtn);
+
+      logoutBtn.addEventListener("click", async () => {
+        try {
+          await Backendless.UserService.logout();
+          alert("Logged out successfully");
+          updateUIForUser(null);
+        } catch (error) {
+          alert("Error during logout: " + (error.message || error));
+        }
+      });
+    }
+  }
+
+  // ----- Fetch and Render Vehicles Dynamically -----
+  async function loadVehicles() {
+    const vehicleContainer = document.getElementById("vehicleContainer");
+    if (!vehicleContainer) return;
+
+    try {
+      const vehicles = await Backendless.Data.of("vehicles").find();
+
+      vehicleContainer.innerHTML = ""; // Clear previous vehicles
+
+      vehicles.forEach((vehicle) => {
+        const card = document.createElement("div");
+        card.className = "vehicle-card";
+
+        const imageUrl = vehicle.imageUrl || "default-car.png";
+
+        card.innerHTML = `
+          <div class="vehicle-image">
+            <img src="${imageUrl}" alt="${vehicle.model}">
+          </div>
+          <div class="vehicle-details">
+            <div class="vehicle-info">
+              <h3>${vehicle.carType}</h3>
+              <div class="price">₹${vehicle.price}<span>/day</span></div>
+            </div>
+            <div class="vehicle-specs">
+              <div class="spec"><i class="fas fa-car"></i> ${vehicle.model}</div>
+              <div class="spec"><i class="fas fa-gas-pump"></i> ${vehicle.fuelType}</div>
+              <div class="spec"><i class="fas fa-cog"></i> ${vehicle.transmission}</div>
+            </div>
+            <button class="book-now-btn" data-car-type="${vehicle.carType}">Book Now</button>
+          </div>
+        `;
+
+        vehicleContainer.appendChild(card);
+      });
+
+      const bookNowBtns = vehicleContainer.querySelectorAll(".book-now-btn");
+      bookNowBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const selectedCarType = btn.getAttribute("data-car-type");
+          const carTypeRadio = document.querySelector(`input[name="carType"][value="${selectedCarType}"]`);
+          if (carTypeRadio) carTypeRadio.checked = true;
+
+          const bookingFormSection = document.getElementById("booking");
+          if (bookingFormSection) {
+            window.scrollTo({
+              top: bookingFormSection.offsetTop - 70,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    } catch (error) {
+      console.error("Error loading vehicles:", error);
+    }
+  }
+  loadVehicles();
+
+  // ----- Booking Form Submission with Overlap Validation -----
   const bookingForm = document.getElementById("carBookingForm");
+
   if (bookingForm) {
     bookingForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Get form values
       const pickupLocation = document.getElementById("pickupLocation").value;
       const dropoffLocation = document.getElementById("dropoffLocation").value;
       const pickupDate = document.getElementById("pickupDate").value;
@@ -198,7 +305,6 @@ document.addEventListener("DOMContentLoaded", () => {
       const pickupDateTime = new Date(pickupDate + "T" + pickupTime);
       const dropoffDateTime = new Date(dropoffDate + "T" + dropoffTime);
 
-      // Validate dates
       if (pickupDateTime < new Date()) {
         alert("Pickup date/time cannot be in the past");
         return;
@@ -209,7 +315,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        // Get logged in user info
         const currentUser = await Backendless.UserService.getCurrentUser();
 
         if (!currentUser) {
@@ -217,7 +322,22 @@ document.addEventListener("DOMContentLoaded", () => {
           return;
         }
 
-        // Prepare booking data object matching backendless bookings table
+        // Check for overlapping bookings of this user
+        const whereClause = `
+          custld = '${currentUser.objectId}' AND
+          pickupDatetime <= '${dropoffDateTime.toISOString()}' AND
+          dropDatetime >= '${pickupDateTime.toISOString()}'
+        `;
+
+        const overlappingBookings = await Backendless.Data.of("bookings").find({
+          whereClause: whereClause,
+        });
+
+        if (overlappingBookings.length > 0) {
+          alert("You already have a booking during this period. Please finish or cancel it before making a new booking.");
+          return;
+        }
+
         const bookingData = {
           carld: carType,
           pickupLocation,
@@ -226,7 +346,7 @@ document.addEventListener("DOMContentLoaded", () => {
           dropDatetime: dropoffDateTime.toISOString(),
           custld: currentUser.objectId,
           usermail: currentUser.email,
-          ContactNumber: currentUser.contact || "", // if you store contact; else empty
+          ContactNumber: currentUser.contact || "",
         };
 
         await Backendless.Data.of("bookings").save(bookingData);
@@ -238,7 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // Minimum date setup and dropoff date adjustments (keep your existing code)
+    // Booking date min setup (your existing logic)
     const today = new Date().toISOString().split("T")[0];
     document.getElementById("pickupDate").min = today;
     document.getElementById("dropoffDate").min = today;
@@ -252,106 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
-
   
-
-  // Reviews slider functionality
-  const reviewCards = document.querySelectorAll(".review-card")
-  const dots = document.querySelectorAll(".dot")
-  const prevBtn = document.getElementById("prevReview")
-  const nextBtn = document.getElementById("nextReview")
-
-  if (reviewCards.length > 0 && dots.length > 0) {
-    let currentIndex = 0
-
-    // Function to show review at specific index
-    function showReview(index) {
-      // Hide all reviews
-      reviewCards.forEach((card) => {
-        card.classList.remove("active")
-      })
-
-      // Deactivate all dots
-      dots.forEach((dot) => {
-        dot.classList.remove("active")
-      })
-
-      // Show current review and activate current dot
-      reviewCards[index].classList.add("active")
-      dots[index].classList.add("active")
-
-      currentIndex = index
-    }
-
-    // Next button click
-    if (nextBtn) {
-      nextBtn.addEventListener("click", () => {
-        let nextIndex = currentIndex + 1
-        if (nextIndex >= reviewCards.length) {
-          nextIndex = 0
-        }
-        showReview(nextIndex)
-      })
-    }
-
-    // Previous button click
-    if (prevBtn) {
-      prevBtn.addEventListener("click", () => {
-        let prevIndex = currentIndex - 1
-        if (prevIndex < 0) {
-          prevIndex = reviewCards.length - 1
-        }
-        showReview(prevIndex)
-      })
-    }
-
-    // Dot clicks
-    dots.forEach((dot) => {
-      dot.addEventListener("click", function () {
-        const index = Number.parseInt(this.getAttribute("data-index"))
-        showReview(index)
-      })
-    })
-
-    // Auto-rotate reviews every 5 seconds
-    setInterval(() => {
-      let nextIndex = currentIndex + 1
-      if (nextIndex >= reviewCards.length) {
-        nextIndex = 0
-      }
-      showReview(nextIndex)
-    }, 5000)
-  }
-
-  // Book Now buttons functionality
-  const bookNowBtns = document.querySelectorAll(".book-now-btn")
-  bookNowBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      // Scroll to booking form
-      const bookingForm = document.getElementById("booking")
-      if (bookingForm) {
-        window.scrollTo({
-          top: bookingForm.offsetTop - 70,
-          behavior: "smooth",
-        })
-      }
-    })
-  })
-
-  // Newsletter form submission
-  const newsletterForm = document.querySelector(".newsletter-form")
-  if (newsletterForm) {
-    newsletterForm.addEventListener("submit", function (e) {
-      e.preventDefault()
-      const emailInput = this.querySelector('input[type="email"]')
-      if (emailInput && emailInput.value) {
-        alert(`Thank you for subscribing with: ${emailInput.value}`)
-        emailInput.value = ""
-      }
-    })
-  }
-})
-
 
 
 
