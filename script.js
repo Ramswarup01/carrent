@@ -1,117 +1,259 @@
-Backendless.initApp(
-  "A33C4544-3EA3-40F5-9373-C30AD3163696",
-  "00582F4D-AA36-4053-8D41-2C6C9F9C4F03"
-);
-
 document.addEventListener("DOMContentLoaded", () => {
-  // Mobile menu toggle
-  const mobileMenuBtn = document.getElementById("mobileMenuBtn")
-  const navLinks = document.getElementById("navLinks")
+  // ----- Backendless Initialization -----
+  Backendless.initApp(
+    "A33C4544-3EA3-40F5-9373-C30AD3163696",
+    "00582F4D-AA36-4053-8D41-2C6C9F9C4F03"
+  );
+
+  // ----- Mobile menu toggle -----
+  const mobileMenuBtn = document.getElementById("mobileMenuBtn");
+  const navLinks = document.getElementById("navLinks");
 
   if (mobileMenuBtn && navLinks) {
     mobileMenuBtn.addEventListener("click", () => {
-      navLinks.classList.toggle("active")
-
-      // Toggle icon between bars and times
-      const icon = mobileMenuBtn.querySelector("i")
+      navLinks.classList.toggle("active");
+      const icon = mobileMenuBtn.querySelector("i");
       if (icon.classList.contains("fa-bars")) {
-        icon.classList.remove("fa-bars")
-        icon.classList.add("fa-times")
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-times");
       } else {
-        icon.classList.remove("fa-times")
-        icon.classList.add("fa-bars")
+        icon.classList.remove("fa-times");
+        icon.classList.add("fa-bars");
       }
-    })
+    });
   }
 
-  // Smooth scrolling for navigation links
+  // ----- Smooth scrolling for navigation links -----
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
-      e.preventDefault()
+      e.preventDefault();
+      const targetId = this.getAttribute("href");
+      if (targetId === "#") return;
 
-      const targetId = this.getAttribute("href")
-      if (targetId === "#") return
-
-      const targetElement = document.querySelector(targetId)
+      const targetElement = document.querySelector(targetId);
       if (targetElement) {
         window.scrollTo({
-          top: targetElement.offsetTop - 70, // Adjust for header height
+          top: targetElement.offsetTop - 70,
           behavior: "smooth",
-        })
+        });
 
-        // Close mobile menu if open
         if (navLinks.classList.contains("active")) {
-          navLinks.classList.remove("active")
-          const icon = mobileMenuBtn.querySelector("i")
-          icon.classList.remove("fa-times")
-          icon.classList.add("fa-bars")
+          navLinks.classList.remove("active");
+          const icon = mobileMenuBtn.querySelector("i");
+          icon.classList.remove("fa-times");
+          icon.classList.add("fa-bars");
         }
       }
-    })
-  })
+    });
+  });
 
-  // Booking form validation
-  const bookingForm = document.getElementById("carBookingForm")
+  // ----- Authentication UI Elements -----
+  const signInFormDiv = document.getElementById("signInForm");
+  const registerFormDiv = document.getElementById("registerForm");
+  const authModal = document.getElementById("authModal");
+  const showRegisterBtn = document.getElementById("showRegister");
+  const showSignInBtn = document.getElementById("showSignIn");
+  const signInBtn = document.querySelector(".sign-in");
+  const registerBtn = document.querySelector(".register");
+  const authButtons = document.querySelector(".auth-buttons");
+
+  // ----- Open/Close Auth Modal -----
+  function openAuthModal() {
+    authModal.style.display = "block";
+  }
+  function closeAuthModal() {
+    authModal.style.display = "none";
+  }
+
+  if (signInBtn) signInBtn.addEventListener("click", () => {
+    showSignInForm();
+    openAuthModal();
+  });
+
+  if (registerBtn) registerBtn.addEventListener("click", () => {
+    showRegisterForm();
+    openAuthModal();
+  });
+
+  window.addEventListener("click", (e) => {
+    if (e.target === authModal) closeAuthModal();
+  });
+
+  // ----- Switch Auth Forms -----
+  showRegisterBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showRegisterForm();
+  });
+
+  showSignInBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showSignInForm();
+  });
+
+  function showRegisterForm() {
+    signInFormDiv.style.display = "none";
+    registerFormDiv.style.display = "block";
+  }
+  function showSignInForm() {
+    registerFormDiv.style.display = "none";
+    signInFormDiv.style.display = "block";
+  }
+
+  // ----- User Session Management -----
+  function updateUIForUser(user) {
+    if (user) {
+      authButtons.style.display = "none";
+      // Optionally show user info or logout button here
+    } else {
+      authButtons.style.display = "flex";
+    }
+  }
+
+  // Check if user is already logged in
+  Backendless.UserService.isValidLogin().then(isValid => {
+    if (isValid) {
+      Backendless.UserService.getCurrentUser().then(user => {
+        updateUIForUser(user);
+      });
+    } else {
+      updateUIForUser(null);
+    }
+  });
+
+  // ----- Register Form Submission -----
+  const register = document.getElementById("register");
+  if (register) {
+    register.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("registerName").value.trim();
+      const email = document.getElementById("registerEmail").value.trim();
+      const password = document.getElementById("registerPassword").value;
+
+      if (!name || !email || !password) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      try {
+        const user = new Backendless.User();
+        user.email = email;
+        user.password = password;
+        user.name = name;
+
+        const registeredUser = await Backendless.UserService.register(user);
+        alert(`Registered successfully: ${registeredUser.email}`);
+
+        register.reset();
+        showSignInForm();
+      } catch (error) {
+        alert("Registration failed: " + (error.message || error));
+      }
+    });
+  }
+
+  // ----- Sign-In Form Submission -----
+  const signIn = document.getElementById("signIn");
+  if (signIn) {
+    signIn.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("signInEmail").value.trim();
+      const password = document.getElementById("signInPassword").value;
+
+      if (!email || !password) {
+        alert("Please fill in all fields!");
+        return;
+      }
+
+      try {
+        const loggedInUser = await Backendless.UserService.login(email, password, true);
+        alert(`Signed in as: ${loggedInUser.email}`);
+        updateUIForUser(loggedInUser);
+        closeAuthModal();
+      } catch (error) {
+        alert("Error signing in: " + (error.message || error));
+      }
+    });
+  }
+
+  // ----- Booking Form Submission -----
+  const bookingForm = document.getElementById("carBookingForm");
   if (bookingForm) {
-    bookingForm.addEventListener("submit", (e) => {
-      e.preventDefault()
+    bookingForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
       // Get form values
-      const pickupLocation = document.getElementById("pickupLocation").value
-      const dropoffLocation = document.getElementById("dropoffLocation").value
-      const pickupDate = document.getElementById("pickupDate").value
-      const pickupTime = document.getElementById("pickupTime").value
-      const dropoffDate = document.getElementById("dropoffDate").value
-      const dropoffTime = document.getElementById("dropoffTime").value
-      const carType = document.querySelector('input[name="carType"]:checked').value
+      const pickupLocation = document.getElementById("pickupLocation").value;
+      const dropoffLocation = document.getElementById("dropoffLocation").value;
+      const pickupDate = document.getElementById("pickupDate").value;
+      const pickupTime = document.getElementById("pickupTime").value;
+      const dropoffDate = document.getElementById("dropoffDate").value;
+      const dropoffTime = document.getElementById("dropoffTime").value;
+      const carType = document.querySelector('input[name="carType"]:checked').value;
 
-      // Basic validation
       if (!pickupLocation || !dropoffLocation || !pickupDate || !pickupTime || !dropoffDate || !dropoffTime) {
-        alert("Please fill in all required fields")
-        return
+        alert("Please fill in all required fields");
+        return;
       }
 
-      // Check if pickup date is not in the past
-      const today = new Date()
-      today.setHours(0, 0, 0, 0)
-      const pickup = new Date(pickupDate)
+      const pickupDateTime = new Date(pickupDate + "T" + pickupTime);
+      const dropoffDateTime = new Date(dropoffDate + "T" + dropoffTime);
 
-      if (pickup < today) {
-        alert("Pickup date cannot be in the past")
-        return
+      // Validate dates
+      if (pickupDateTime < new Date()) {
+        alert("Pickup date/time cannot be in the past");
+        return;
+      }
+      if (dropoffDateTime <= pickupDateTime) {
+        alert("Drop-off date/time must be after pickup date/time");
+        return;
       }
 
-      // Check if dropoff date is after pickup date
-      const dropoff = new Date(dropoffDate)
-      if (dropoff < pickup) {
-        alert("Drop-off date must be after pickup date")
-        return
+      try {
+        // Get logged in user info
+        const currentUser = await Backendless.UserService.getCurrentUser();
+
+        if (!currentUser) {
+          alert("Please sign in before making a booking");
+          return;
+        }
+
+        // Prepare booking data object matching backendless bookings table
+        const bookingData = {
+          carld: carType,
+          pickupLocation,
+          dropoffLocation,
+          pickupDatetime: pickupDateTime.toISOString(),
+          dropDatetime: dropoffDateTime.toISOString(),
+          custld: currentUser.objectId,
+          usermail: currentUser.email,
+          ContactNumber: currentUser.contact || "", // if you store contact; else empty
+        };
+
+        await Backendless.Data.of("bookings").save(bookingData);
+
+        alert("Booking submitted successfully!");
+        bookingForm.reset();
+      } catch (error) {
+        alert("Failed to submit booking: " + (error.message || error));
       }
+    });
 
-      // If all validation passes, show success message
-      alert(
-        `Booking request submitted successfully!\n\nPickup: ${pickupLocation} on ${pickupDate} at ${pickupTime}\nDrop-off: ${dropoffLocation} on ${dropoffDate} at ${dropoffTime}\nCar Type: ${carType}`,
-      )
+    // Minimum date setup and dropoff date adjustments (keep your existing code)
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("pickupDate").min = today;
+    document.getElementById("dropoffDate").min = today;
 
-      // Reset form
-      bookingForm.reset()
-    })
-
-    // Set minimum date for date inputs to today
-    const today = new Date().toISOString().split("T")[0]
-    document.getElementById("pickupDate").min = today
-    document.getElementById("dropoffDate").min = today
-
-    // Update dropoff date min value when pickup date changes
     document.getElementById("pickupDate").addEventListener("change", function () {
-      document.getElementById("dropoffDate").min = this.value
-
-      // If dropoff date is before new pickup date, update it
+      document.getElementById("dropoffDate").min = this.value;
       if (document.getElementById("dropoffDate").value < this.value) {
-        document.getElementById("dropoffDate").value = this.value
+        document.getElementById("dropoffDate").value = this.value;
       }
-    })
+    });
   }
+
+
+
+  
 
   // Reviews slider functionality
   const reviewCards = document.querySelectorAll(".review-card")
