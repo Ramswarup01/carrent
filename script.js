@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "00582F4D-AA36-4053-8D41-2C6C9F9C4F03"
   );
 
-  // ----- Mobile menu toggle -----
+  // ----- Mobile Menu Toggle -----
   const mobileMenuBtn = document.getElementById("mobileMenuBtn");
   const navLinks = document.getElementById("navLinks");
 
@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ----- Smooth scrolling for navigation links -----
+  // ----- Smooth Scrolling for Navigation Links -----
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
@@ -80,15 +80,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === authModal) closeAuthModal();
   });
 
-  showRegisterBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    showRegisterForm();
-  });
+  // Add event listeners for form switching
+  if (showRegisterBtn) {
+    showRegisterBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showRegisterForm();
+    });
+  }
 
-  showSignInBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    showSignInForm();
-  });
+  if (showSignInBtn) {
+    showSignInBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      showSignInForm();
+    });
+  }
 
   // ----- User Session Management -----
   function updateUIForUser(user) {
@@ -231,10 +236,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const imageUrl = vehicle.imageUrl || "placeholder.svg";
 
-        // Fill in vehicle options for selection
-        if (!showAll) {
+        // Populate the car types in the dropdown
+        if (!carTypeSelect.querySelector(`option[value="${vehicle.carType}"]`)) {
           const option = document.createElement("option");
-          option.value = vehicle.carType;
+          option.value = vehicle.carType.toLowerCase();
           option.textContent = vehicle.carType;
           carTypeSelect.appendChild(option);
         }
@@ -265,8 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
       bookNowBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           const selectedCarType = btn.getAttribute("data-car-type");
-          const carTypeRadio = carTypeSelect.querySelector(`option[value="${selectedCarType}"]`);
-          if (carTypeRadio) carTypeRadio.selected = true;
+          const carTypeOption = carTypeSelect.querySelector(`option[value="${selectedCarType.toLowerCase()}"]`);
+          if (carTypeOption) carTypeOption.selected = true;
 
           const bookingFormSection = document.getElementById("booking");
           if (bookingFormSection) {
@@ -280,7 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       const viewAllBtn = document.querySelector(".view-all-btn");
-      if (viewAllBtn) {
+      if (viewAllBtn && vehicles.length > 3) {
         viewAllBtn.style.display = showAll ? "none" : "block";
         viewAllBtn.addEventListener("click", () => loadVehicles(true));
       }
