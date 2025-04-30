@@ -318,10 +318,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function showReview(index) {
     reviews.forEach((review, i) => {
-      review.style.display = (i === index) ? "block" : "none";
-      dots[i].classList.toggle("active", i === index);
+        const isActive = i === index;
+        review.style.display = isActive ? "block" : "none";
+        dots[i].classList.toggle("active", isActive);
+        console.log(`Review ${i} is ${isActive ? 'visible' : 'hidden'}`);
     });
-  }
+}
 
   document.getElementById("prevReview").addEventListener("click", () => {
     currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
