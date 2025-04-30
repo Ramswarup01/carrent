@@ -217,6 +217,22 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  
+  // Event listener for 'Book Ride' button
+    const bookRideButton = document.querySelector(".book-ride");
+  if (bookRideButton) {
+    bookRideButton.addEventListener("click", () => {
+      const bookingFormSection = document.getElementById("booking");
+      if (bookingFormSection) {
+        bookingFormSection.style.display = "block"; // Ensure booking form is visible
+        window.scrollTo({
+          top: bookingFormSection.offsetTop - 70,
+          behavior: "smooth",
+        });
+      }
+    });
+  }
+  
   // ----- Fetch and Render Vehicles Dynamically -----
   async function loadVehicles(showAll = false) {
     const vehicleContainer = document.getElementById("vehicleContainer");
