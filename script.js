@@ -313,29 +313,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ----- Review Slider Functionality -----
   let currentReviewIndex = 0;
-  const reviews = document.querySelectorAll('.review-card');
-  const dots = document.querySelectorAll('.review-dots .dot');
+    const reviews = document.querySelectorAll('.review-card');
+    const dots = document.querySelectorAll('.review-dots .dot');
+    
+    function showReview(index) {
+        reviews.forEach((review, i) => {
+            review.style.display = i === index ? "block" : "none";
+            dots[i].classList.toggle("active", i === index);
+            console.log(`Review ${i} is ${i === index ? 'visible' : 'hidden'}`);
+        });
+    }
 
-  function showReview(index) {
-    reviews.forEach((review, i) => {
-        const isActive = i === index;
-        review.style.display = isActive ? "block" : "none";
-        dots[i].classList.toggle("active", isActive);
-        console.log(`Review ${i} is ${isActive ? 'visible' : 'hidden'}`);
+    document.getElementById("prevReview").addEventListener("click", () => {
+        currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
+        showReview(currentReviewIndex);
     });
-}
 
-  document.getElementById("prevReview").addEventListener("click", () => {
-    currentReviewIndex = (currentReviewIndex - 1 + reviews.length) % reviews.length;
-    showReview(currentReviewIndex);
-  });
+    document.getElementById("nextReview").addEventListener("click", () => {
+        currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+        showReview(currentReviewIndex);
+    });
 
-  document.getElementById("nextReview").addEventListener("click", () => {
-    currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
-    showReview(currentReviewIndex);
-  });
+    setInterval(() => {
+        currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+        showReview(currentReviewIndex);
+    }, 5000);  // Auto-cycle every 5 seconds
 
-  showReview(currentReviewIndex); // Initialize the first review
+    showReview(currentReviewIndex);  // Run initially to set first review visible
+
 
   // ----- Booking Form Submission with Overlap Validation -----
   const bookingForm = document.getElementById("carBookingForm");
