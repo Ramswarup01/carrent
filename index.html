@@ -26,10 +26,7 @@
                 <i class="fas fa-bars"></i>
             </div>
         </nav>
-        <div class="auth-buttons">
-            <button class="sign-in">Sign In</button>
-            <button class="register">Register</button>
-        </div>
+        <div class="auth-buttons"> </div>
     </header>
 
     <!-- Sign-In & Register Modal -->
@@ -266,11 +263,56 @@
                             </div>
                         </div>
                     </div>
+                    <div class="review-card">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p class="review-text">
+                            "Excellent service from start to finish. The online booking was easy, the staff was courteous, and the entire rental process was completely stress-free."
+                        </p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="reviewer.jpg" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Meena Patel</h4>
+                                <p>Pune</p>
+                            </div>
+                        </div>
+                      </div>
+                      
+                      <div class="review-card">
+                        <div class="review-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p class="review-text">
+                            "The vehicles are always clean and well maintained, and the rates are unbeatable. Highly recommended for anyone looking for a reliable car rental experience."
+                        </p>
+                        <div class="reviewer">
+                            <div class="reviewer-image">
+                                <img src="reviewer.jpg" alt="Reviewer">
+                            </div>
+                            <div class="reviewer-info">
+                                <h4>Rohit Sen</h4>
+                                <p>Kolkata</p>
+                            </div>
+                        </div>
+                      </div>
                 </div>
                 <div class="review-dots" id="reviewDots">
-                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="0"></span>
                     <span class="dot" data-index="1"></span>
                     <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
                 </div>
             </div>
         </div>
@@ -330,7 +372,19 @@
         </div>
     </footer>
 
-    <script src="script.js"></script>
+    <div class="modal" id="bookingConfirmModal">
+        <div class="modal-content" style="max-width:350px;text-align:center;">
+          <h3>Confirm Booking</h3>
+          <div id="bookingConfirmationDetails" style="margin:1em 0;">
+            <!-- Booking details will appear here -->
+          </div>
+          <button id="confirmBookingBtn" style="margin-bottom:8px;">Confirm</button>
+          <button id="cancelBookingBtn" style="background:#eee;color:#333;">Cancel</button>
+        </div>
+      </div>
+
+      
     <script src="https://api.backendless.com/sdk/js/latest/backendless.min.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
