@@ -34,6 +34,10 @@ section {
   background-color: rgba(0, 0, 0, 0.5); /* Black with transparency */
 }
 
+.modal.open {
+  display: block !important;
+}
+
 .modal-content {
   background-color: #fff;
   margin: 10% auto;
@@ -210,6 +214,12 @@ nav {
   background-color: #00b4ff;
   color: white;
   border: none;
+}
+
+.input-error {
+  border: 2px solid #ff3b3b !important;
+  background: #fff3f3;
+  transition: border .2s, background .2s;
 }
 
 .learn-more {
