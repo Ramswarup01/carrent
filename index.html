@@ -383,7 +383,26 @@
         </div>
       </div>
 
-      
+      <!-- Toast Notification Element -->
+    <div id="toast-notification" style="
+    display:none;
+    position: fixed;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #262626;
+    color: #fff;
+    padding: 14px 32px;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,.13);
+    font-size: 1em;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.4s, bottom 0.4s;">
+    <!-- Toast message goes here -->
+        All field are to be filled.
+    </div>
+
     <script src="https://api.backendless.com/sdk/js/latest/backendless.min.js"></script>
     <script src="script.js"></script>
 </body>
