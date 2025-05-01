@@ -385,6 +385,41 @@ const cancelBookingBtn = document.getElementById('cancelBookingBtn');
 // These will store state between clicks
 let pendingBookingVehicle = null;
 
+function areBookingFormFieldsFilled() {
+  const requiredIds = [
+    "pickupLocation",
+    "dropoffLocation",
+    "pickupDate",
+    "pickupTime",
+    "dropoffDate",
+    "dropoffTime"
+  ];
+  for (const id of requiredIds) {
+    const el = document.getElementById(id);
+    if (!el || !el.value) return false;
+  }
+  return true;
+}
+
+function setBookNowEvent(btn, vehicle) {
+  btn.addEventListener("click", () => {
+    if (!areBookingFormFieldsFilled()) {
+      // No alert! Show toast instead
+      showToast("Please fill out all booking form fields.");
+
+      // Scroll to booking form smoothly
+      const bookingSection = document.getElementById('booking');
+      if (bookingSection) {
+        bookingSection.style.display = 'block';
+        bookingSection.scrollIntoView({ behavior: "smooth" });
+      }
+      return;
+    }
+
+    openBookingConfirmModal(vehicle);
+  });
+}
+
 function openBookingConfirmModal(vehicle) {
   pendingBookingVehicle = vehicle;
   if (!bookingConfirmModal) return;
@@ -634,6 +669,25 @@ if (confirmBookingBtn) {
         alert("Failed to submit booking: " + (error.message || error));
       }
     });
+
+    function showToast(message, duration = 2200) {
+      const toast = document.getElementById('toast-notification');
+      if (!toast) return;
+      toast.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => {
+        toast.style.opacity = 1;
+        toast.style.bottom = '32px';
+      }, 10); // Trigger transition
+    
+      setTimeout(() => {
+        toast.style.opacity = 0;
+        toast.style.bottom = '0px';
+        setTimeout(() => {
+          toast.style.display = 'none';
+        }, 400);
+      }, duration);
+    }
 
     // Set minimum dates for booking inputs
     const today = new Date().toISOString().split("T")[0];
